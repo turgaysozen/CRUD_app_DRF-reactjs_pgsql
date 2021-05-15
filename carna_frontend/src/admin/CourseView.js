@@ -5,7 +5,6 @@ import { FindCourse, FetchCourses } from '../services';
 export default function CourseView(props) {
     const [course, setCourse] = useState([])
     const [courses, setCourses] = useState([])
-    const [random_courses, setRandomCourses] = useState([])
 
     // find selected course to view
     useEffect(() => {

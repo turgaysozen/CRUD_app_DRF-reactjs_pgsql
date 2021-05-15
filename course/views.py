@@ -10,7 +10,6 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 @api_view(['GET'])
 def course_list(request):
-    print(request.user)
     courses = Course.objects.all()
     serializer = CourseSerializer(courses, many=True)
     return Response(serializer.data, status=200)

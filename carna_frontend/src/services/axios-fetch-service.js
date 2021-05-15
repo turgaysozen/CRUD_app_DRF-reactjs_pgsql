@@ -59,7 +59,7 @@ export const FindUser = async (props) => {
 
 export const LoginUser = (username, password) => {
     axiosInstance
-        .post(`token/`, {
+        .post(`account/token/`, {
             username: username,
             password: password,
         })
@@ -72,4 +72,19 @@ export const LoginUser = (username, password) => {
             window.location.href = '/'
 
         })
+}
+
+export const Logout = () => {
+    axiosInstance.post('account/logout', {
+        refresh_token: localStorage.getItem('refresh_token'),
+    });
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    axiosInstance.defaults.headers['Authorization'] = null;
+    window.location.href = 'admin/login'
+}
+
+// get authenticated user
+export const AuthUser = async () => {
+    return await axiosInstance.get("/account/user")
 }

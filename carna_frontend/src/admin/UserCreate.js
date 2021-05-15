@@ -19,20 +19,8 @@ export default function UserCreate() {
         if (res.status === 201) {
             setRedirect(true)
         } else alert('Something Went Wrong!')
-        // axiosInstance.post('user/create',
-        //     {
-        //         name: name,
-        //         lastname: lastname,
-        //         school: school,
-        //         city: city,
-        //         country: country
-        //     }).then((res) => {
-        //         if (res.status === 201) {
-        //             setRedirect(true)
-        //         } else alert('Something Went Wrong!')
-        //     })
     }
-    
+
     // redirect the page if creation successfull
     if (redirect) return <Redirect to="/admin/users" />
 

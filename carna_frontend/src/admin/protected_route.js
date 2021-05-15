@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { auth } from '../services'
 
+// it gets a route and render or redirect to login component after checking authenticated status
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
     return (
         <Route

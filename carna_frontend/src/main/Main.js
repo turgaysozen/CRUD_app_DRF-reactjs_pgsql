@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Wrapper from '../admin/Wrapper'
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FetchCourses } from '../services'
 
 // main component, it shows courses on http://localhost:3000/

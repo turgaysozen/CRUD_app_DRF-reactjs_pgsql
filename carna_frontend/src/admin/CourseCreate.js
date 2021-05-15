@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router'
 import Wrapper from './Wrapper'
-import { axiosInstance } from '../services';
 import { CreateCourse } from '../services';
 
 
