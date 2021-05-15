@@ -1,7 +1,7 @@
 import Wrapper from './Wrapper'
 import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
-import { axiosInstance } from '../services';
+import { FetchCourses, DeleteCourse } from '../services';
 
 // course list page, renders all of courses to the table
 export default function Courses() {
@@ -12,15 +12,10 @@ export default function Courses() {
     // load courses
     useEffect(() => {
         const loadCourses = async () => {
-            axiosInstance.get('/course')
-            .then((res) => {
-                console.log(res)
+            const res = await FetchCourses()
+            if (res.status === 200) {
                 setCourses(res.data)
-            }).catch((err) => {
-                if(err.response.status === 401){
-                    window.location.href = '/admin/login'
-                }
-            })
+            } else alert('Something went wrong!')
         }
         loadCourses()
     }, [])
@@ -28,12 +23,12 @@ export default function Courses() {
     // delete selected course
     const deleteCourse = async (id) => {
         if (window.confirm('Are you sure you want to delete this course?')) {
-            axiosInstance.delete(`/course/delete/${id}`)
-            .then((res) => {
+            const res = await DeleteCourse(id)
+            if (res.status === 200) {
                 alert('Course deleted!')
-            }).catch((err) => {
+            } else {
                 alert('Something went wrong!')
-            })
+            }
             setCourses(courses.filter((c) => c.id !== id));
         }
     }
@@ -46,7 +41,7 @@ export default function Courses() {
                     course.name.toLowerCase().includes(search.toLowerCase()) ||
                     course.description.toLowerCase().includes(search.toLowerCase()) ||
                     course.price.toString().toLowerCase().includes(search.toLowerCase())
-                    )
+                )
             })
         )
     }, [search, courses])

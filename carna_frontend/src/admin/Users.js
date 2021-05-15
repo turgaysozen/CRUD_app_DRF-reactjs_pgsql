@@ -1,7 +1,8 @@
 import Wrapper from './Wrapper'
 import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
-import { axiosInstance } from '../services';
+import { FetchUsers } from '../services';
+import { DeleteUser } from '../services/axios-fetch-service';
 
 // user list page, renders all of users to the table
 export default function Users() {
@@ -12,15 +13,10 @@ export default function Users() {
     // load users
     useEffect(() => {
         const loadUsers = async () => {
-            axiosInstance.get('/user')
-            .then((res) => {
-                console.log(res)
+            const res = await FetchUsers()
+            if (res.status === 200) {
                 setUsers(res.data)
-            }).catch((err) => {
-                if(err.response.status === 401){
-                    window.location.href = '/admin/login'
-                }
-            })
+            } else alert('Something went wrong!')
         }
         loadUsers()
     }, [])
@@ -28,13 +24,13 @@ export default function Users() {
     // delete selected user
     const deleteUser = async (id) => {
         if (window.confirm('Are you sure you want to delete this user?')) {
-            axiosInstance.delete(`/user/delete/${id}`)
-            .then((res) => {
+            const res = await DeleteUser(id)
+            if (res.status === 200) {
                 alert('User deleted!')
-            }).catch((err) => {
+            } else {
                 alert('Something went wrong!')
-            })
-            setUsers(users.filter((u) => u.id !== id));
+            }
+            setUsers(users.filter((c) => c.id !== id));
         }
     }
     

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Redirect } from 'react-router'
 import Wrapper from './Wrapper'
 import { axiosInstance } from '../services';
+import { CreateCourse } from '../services';
+
 
 export default function CourseCreate() {
     const [course_name, setCourseName] = useState()
@@ -12,16 +14,10 @@ export default function CourseCreate() {
     // create course
     const handleSubmit = async (e) => {
         e.preventDefault()
-        axiosInstance.post('course/create',
-            {
-                name: course_name,
-                description: description,
-                price: price
-            }).then((res) => {
-                if (res.status === 201) {
-                    setRedirect(true)
-                } else alert('Something Went Wrong!')
-            })
+        const res = await CreateCourse({ name: course_name, description: description, price: price })
+        if (res.status === 201) {
+            setRedirect(true)
+        } else alert('Something Went Wrong!')
     }
 
     // redirect the page if creation successfull

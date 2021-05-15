@@ -8,28 +8,40 @@ import UserCreate from './admin/UserCreate'
 import UserEdit from './admin/UserEdit'
 import CourseView from './admin/CourseView'
 import Login from './admin/Login'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Redirect } from 'react-router'
+import { ProtectedRoute } from './admin/protected_route'
 
-const auth = true
 function App() {
-  if (auth) {
-    return (
-      <div className="App">
-        <BrowserRouter>
-          <Route path='/' exact component={Main} />
-          <Route path="/admin/courses" component={Courses} />
-          <Route path="/admin/course/create" component={CourseCreate} />
-          <Route path="/admin/course/edit/:id" component={CourseEdit} />
-          <Route path="/course/view/:id" component={CourseView} />
-          <Route path="/admin/users" component={Users} />
-          <Route path="/admin/user/create" component={UserCreate} />
-          <Route path="/admin/user/edit/:id" component={UserEdit} />
-          <Route path="/admin/login" component={Login} />
-        </BrowserRouter>
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      {/* <BrowserRouter> */}
+        {/* <ProtectedRoute path="/" exact component={Main} />
+        <Route path="/admin/courses" component={Courses} />
+        <Route path="/admin/course/create" component={CourseCreate} />
+        <Route path="/admin/course/edit/:id" component={CourseEdit} />
+        <Route path="/course/view/:id" component={CourseView} />
+        <Route path="/admin/users" component={Users} />
+        <Route path="/admin/user/create" component={UserCreate} />
+        <Route path="/admin/user/edit/:id" component={UserEdit} />
+        <Route path="/admin/login" component={Login} />
+      </BrowserRouter> */}
+      <Switch>
+        <ProtectedRoute path="/" exact component={Main} />
+        <Route path="/admin/login" component={Login} />
+        <ProtectedRoute path="/admin/courses" exact component={Courses} />
+        <ProtectedRoute path="/admin/course/edit/:id" component={CourseEdit} />
+        <ProtectedRoute path="/admin/course/create" component={CourseCreate} />
+        <ProtectedRoute path="/course/view/:id" component={CourseView} />
+        <ProtectedRoute path="/admin/users" exact component={Users} />
+        <ProtectedRoute path="/admin/user/create" component={UserCreate} />
+        <ProtectedRoute path="/admin/user/edit/:id" component={UserEdit} />
+
+
+      </Switch>
+
+    </div>
+  );
 }
 export default App;
 

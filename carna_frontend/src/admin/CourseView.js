@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Wrapper from './Wrapper'
-import { axiosInstance } from '../services';
+import { FindCourse, FetchCourses } from '../services';
 
 export default function CourseView(props) {
     const [course, setCourse] = useState([])
@@ -10,14 +10,10 @@ export default function CourseView(props) {
     // find selected course to view
     useEffect(() => {
         const loadCourse = async () => {
-            axiosInstance.get(`/course/${props.match.params.id}`)
-            .then((res) => {
+            const res = await FindCourse(props.props)
+            if (res.status === 200) {
                 setCourse(res.data)
-            }).catch((err) => {
-                if(err.response.status === 401){
-                    window.location.href = '/admin/login'
-                }
-            })
+            }
         }
         loadCourse()
     }, [])
@@ -25,21 +21,10 @@ export default function CourseView(props) {
     // load all courses
     useEffect(() => {
         const loadCourses = async () => {
-            await axiosInstance.get('/course')
-            .then((res) => {
+            const res = await FetchCourses()
+            if (res.status === 200) {
                 setCourses(res.data)
-            }).catch((err) => {
-                if(err.response.status === 401){
-                    window.location.href = '/admin/login'
-                }
-            })
-            // var rndCourses = [];
-            // for (var i = 0; i < 2; i++) {
-            //     var rand = courses[Math.floor(Math.random() * courses.length)];
-            //     rndCourses.push(rand)
-
-            // }
-            // setRandomCourses(rndCourses)
+            } else alert('Something went wrong!')
         }
         loadCourses()
     }, [])

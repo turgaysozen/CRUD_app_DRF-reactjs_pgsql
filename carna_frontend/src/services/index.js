@@ -1,32 +1,32 @@
 import {
     FetchCourses,
     DeleteCourse,
-    CreateCourse,
     FindCourse,
     UpdateCourse,
+    CreateCourse,
     FetchUsers,
-    DeleteUser,
     CreateUser,
+    UpdateUser,
     FindUser,
-    UpdateUser, 
-    LoginUser    
-} from './fetch-service'
+    LoginUser,
 
-import {
-    axiosInstance
-} from './axios'
+} from './axios-fetch-service'
+
+import { auth } from './auth'
+
+import { axiosInstance } from './axios'
 
 export {
     FetchCourses,
     DeleteCourse,
-    CreateCourse,
     FindCourse,
     UpdateCourse,
+    CreateCourse,
     FetchUsers,
-    DeleteUser,
     CreateUser,
-    FindUser,
     UpdateUser,
+    FindUser,
     LoginUser,
-    axiosInstance
+    axiosInstance,
+    auth
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router'
 import Wrapper from './Wrapper'
-import { axiosInstance } from '../services';
+import { UpdateUser, FindUser } from '../services';
 
 // update user component
 export default function UserEdit(props) {
@@ -16,18 +16,14 @@ export default function UserEdit(props) {
     useEffect(() => {
         (
             async () => {
-                axiosInstance.get(`/user/${props.match.params.id}`)
-                    .then((res) => {
-                        setUserName(res.data.name)
-                        setUserLastname(res.data.lastname)
-                        setUserSchool(res.data.school)
-                        setUserCity(res.data.city)
-                        setUserCountry(res.data.country)
-                    }).catch((err) => {
-                        if (err.response.status === 401) {
-                            window.location.href = '/admin/login'
-                        }
-                    })
+                const res = await FindUser(props.props)
+                if (res.status === 200) {
+                    setUserName(res.data.name)
+                    setUserLastname(res.data.lastname)
+                    setUserSchool(res.data.school)
+                    setUserCity(res.data.city)
+                    setUserCountry(res.data.country)
+                }
             }
         )()
     }, [])
@@ -35,21 +31,12 @@ export default function UserEdit(props) {
     // update selected user
     const handleSubmit = async (e) => {
         e.preventDefault()
-        axiosInstance.put(`user/update/${props.match.params.id}`,
-            {
-                name: name,
-                lastname: lastname,
-                school: school,
-                city: city,
-                country: country
-            }).then((res) => {
-                if (res.status === 200) {
-                    setRedirect(true)
-                }
-            }).catch((err) => {
-                console.log(err)
-                alert('Something Went Wrong!')
-            })
+        const res = await UpdateUser(props.props, { name: name, lastname: lastname, school: school, city: city, country: country })
+        if (res.status === 200) {
+            setRedirect(true)
+        } else {
+            alert('Something Went Wrong!')
+        }
     }
 
     // redirect the page if update successfull

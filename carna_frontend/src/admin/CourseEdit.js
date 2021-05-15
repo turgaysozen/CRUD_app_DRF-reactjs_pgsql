@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router'
 import Wrapper from './Wrapper'
-import { axiosInstance } from '../services';
+import { FindCourse, UpdateCourse } from '../services';
 
 // update course component
 export default function CourseEdit(props) {
@@ -14,16 +14,12 @@ export default function CourseEdit(props) {
     useEffect(() => {
         (
             async () => {
-                axiosInstance.get(`/course/${props.match.params.id}`)
-                    .then((res) => {
-                        setCourseName(res.data.name)
-                        setDescription(res.data.description)
-                        setPrice(res.data.price)
-                    }).catch((err) => {
-                        if (err.response.status === 401) {
-                            window.location.href = '/admin/login'
-                        }
-                    })
+                const res = await FindCourse(props.props)
+                if (res.status === 200) {
+                    setCourseName(res.data.name)
+                    setDescription(res.data.description)
+                    setPrice(res.data.price)
+                }
             }
         )()
     }, [])
@@ -31,24 +27,17 @@ export default function CourseEdit(props) {
     // update selected course
     const handleSubmit = async (e) => {
         e.preventDefault()
-        axiosInstance.put(`course/update/${props.match.params.id}`,
-            {
-                name: course_name,
-                description: description,
-                price: price
-            }).then((res) => {
-                if (res.status === 200) {
-                    setRedirect(true)
-                }
-            }).catch((err) => {
-                console.log(err)
-                alert('Something Went Wrong!')
-            })
+        const res = await UpdateCourse(props.props, { name: course_name, description: description, price: price })
+        if (res.status === 200) {
+            setRedirect(true)
+        } else {
+            alert('Something Went Wrong!')
+        }
     }
 
     // redirect the page if update successfull
     if (redirect) return <Redirect to="/admin/courses" />
-    
+
     return (
         <Wrapper>
             <form onSubmit={handleSubmit} style={{ width: '70%' }}>

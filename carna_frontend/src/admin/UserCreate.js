@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router'
 import Wrapper from './Wrapper'
-import { axiosInstance } from '../services';
+import { CreateUser } from '../services';
 
 // create user
 export default function UserCreate() {
@@ -15,18 +15,22 @@ export default function UserCreate() {
     // create new user
     const handleSubmit = async (e) => {
         e.preventDefault()
-        axiosInstance.post('user/create',
-            {
-                name: name,
-                lastname: lastname,
-                school: school,
-                city: city,
-                country: country
-            }).then((res) => {
-                if (res.status === 201) {
-                    setRedirect(true)
-                } else alert('Something Went Wrong!')
-            })
+        const res = await CreateUser({ name: name, lastname: lastname, school: school, city: city, country: country })
+        if (res.status === 201) {
+            setRedirect(true)
+        } else alert('Something Went Wrong!')
+        // axiosInstance.post('user/create',
+        //     {
+        //         name: name,
+        //         lastname: lastname,
+        //         school: school,
+        //         city: city,
+        //         country: country
+        //     }).then((res) => {
+        //         if (res.status === 201) {
+        //             setRedirect(true)
+        //         } else alert('Something Went Wrong!')
+        //     })
     }
     
     // redirect the page if creation successfull
