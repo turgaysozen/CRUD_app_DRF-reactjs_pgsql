@@ -15,7 +15,7 @@ class CourseTestCase(TestCase):
         self.course_count = Course.objects.all().count() 
 
     def get_client_with_auth(self):
-        resp = self.client.post('http://localhost:8000/api/token/', {'username':'test_user', 'password':'1'}, format='json')
+        resp = self.client.post('http://localhost:8000/api/account/token/', {'username':'test_user', 'password':'1'}, format='json')
         token = resp.data["access"]
         client = APIClient()
         client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)

@@ -57,8 +57,9 @@ export const FindUser = async (props) => {
 
 // login
 
-export const LoginUser = (username, password) => {
-    axiosInstance
+export const LoginUser = async (username, password) => {
+    let res_message = ""
+    await axiosInstance
         .post(`account/token/`, {
             username: username,
             password: password,
@@ -70,8 +71,13 @@ export const LoginUser = (username, password) => {
                 'JWT ' + localStorage.getItem('access_token'); // JWT => Bearer ??
             // history.push('/');
             window.location.href = '/'
+            res_message = "successfull"
+        })
+        .catch(err => {
+            res_message = "Username or password is wrong!"
 
         })
+        return res_message
 }
 
 export const Logout = () => {

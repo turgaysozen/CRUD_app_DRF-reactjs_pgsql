@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { LoginUser, auth } from '../services';
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 export default function Login(props) {
     const [username, setUserName] = useState()
     const [password, setUserPassword] = useState()
+    const [message, setMessage] = useState("")
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        LoginUser(username, password)
+        const res = await LoginUser(username, password)
+        setMessage(res)
     };
 
     return (
@@ -28,8 +30,14 @@ export default function Login(props) {
                             onChange={e => setUserPassword(e.target.value)}
                         />
                     </div>
-                    <button type="submit" className="btn btn-primary">Login</button>
+                    <button type="submit" className="btn btn-primary">Login</button><br></br><br></br>
+                    {
+                        message ?
+                            <label className="alert alert-danger">{message}</label>
+                            : ""
+                    }
                 </form>
+
                 :
                 <Redirect to={"/"} />
             }
