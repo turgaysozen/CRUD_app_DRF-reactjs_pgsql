@@ -10,7 +10,9 @@ import {
     FindUser,
     LoginUser,
     AuthUser,
-    Logout
+    Logout,
+    FetchHomeCourses,
+    FetchCategories
 
 } from './axios-fetch-service'
 
@@ -32,5 +34,7 @@ export {
     axiosInstance,
     auth,
     AuthUser,
-    Logout
+    Logout,
+    FetchHomeCourses,
+    FetchCategories
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Wrapper from '../admin/Wrapper'
-import { Link } from "react-router-dom";
-import { FetchCourses } from '../services'
+import { Link, Redirect } from "react-router-dom";
+import { FetchHomeCourses } from '../services'
 
 // main component, it shows courses on http://localhost:3000/
 
@@ -11,7 +11,7 @@ export default function Main() {
     // get all courses
     useEffect(() => {
         const loadCourses = async () => {
-            const res = await FetchCourses()
+            const res = await FetchHomeCourses()
             if (res.status === 200) {
                 setCourses(res.data)
             } else alert('Something went wrong!')
@@ -24,33 +24,27 @@ export default function Main() {
             <main role="main">
                 <div className="album py-5 bg-light">
                     <div className="container">
-                        <h3>Courses</h3>
-                        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                            {courses.map(c => {
-                                c.student_count = Math.floor(Math.random() * 50); // total enrolled student, the number created randomly
-                                return (
-                                    <div style={{ marginTop: '5px' }} key={c.id} className="col">
-                                        <div className="card shadow-sm">
-                                            <div className="card-body">
-                                                <h4>{c.name}</h4>
-                                                <p className="card-text">{c.description}</p>
-                                                <div className="d-flex justify-content-between align-items-center">
-                                                    {/* <div className="btn-group">
-                                                        <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
-                                                        <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
-                                                    </div> */}
-                                                    <Link to={`/course/view/${c.id}`} className="btn btn-sm btn-primary">View</Link>
-                                                    <small className="text-muted">Price: ${c.price}</small>
-                                                    <small className="text-muted">Total Student: {c.student_count}</small>
-                                                    <small className="text-muted">Date: {String(c.created).split('T')[0]}</small>
-
-                                                </div>
-                                            </div>
+                        <h3>All Courses</h3>
+                        {courses.map(c => {
+                            const thumb = `https://img.youtube.com/vi/${c.video_id}/mqdefault.jpg`
+                            console.log(thumb)
+                            c.student_count = Math.floor(Math.random() * 50); // total enrolled student, the number created randomly
+                            return (
+                                <div style={{ cursor: "pointer" }} key={c.id} onClick={() => window.location.href = `/course/${c.id}`} className="row col-md-12">
+                                    <hr />
+                                    <div className="row align-items-center col-md-12 mt-2">
+                                        <div style={{ float: "left" }} className="col-lg-3 pt-2"><img className="img-fluid rounded" src={thumb} alt="..." /></div>
+                                        <div className="col-lg-9 pl-2">
+                                            <div className="pb-3"><h5 style={{ display: "inline" }}>{c.name.substr(0, 70)}..</h5><h5 style={{ float: "right" }}>${c.price}</h5></div>
+                                            <div>{c.description.substr(0, 220)}...</div>
+                                            <span>Total Student: {c.student_count}</span><br></br>
+                                            <span>Created Time: {String(c.created).split('T')[0]}</span>
                                         </div>
+                                        {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/5AOn0BmSXyE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
                                     </div>
-                                )
-                            })}
-                        </div>
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
             </main>

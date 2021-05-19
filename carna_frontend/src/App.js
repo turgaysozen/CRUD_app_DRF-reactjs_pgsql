@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <ProtectedRoute path="/" exact component={Main} />
+        <Route path="/" exact component={Main} />
         <Route path="/admin/login" component={Login} />
         <ProtectedRoute path="/admin/courses" exact component={Courses} />
         <ProtectedRoute path="/admin/course/edit/:id" component={CourseEdit} />

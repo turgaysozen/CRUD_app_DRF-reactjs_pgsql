@@ -63,8 +63,8 @@ export default function Courses() {
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Description</th>
                                 <th>Price</th>
+                                <th>Duration</th>
                                 <th>Created Date</th>
                                 <th>Action</th>
                             </tr>
@@ -75,8 +75,9 @@ export default function Courses() {
                                     <tr key={c.id}>
                                         <td>{c.id}</td>
                                         <td>{c.name}</td>
-                                        <td>{c.description}</td>
+                                        {/* <td><img height="60px" width="60px" src="https://img.youtube.com/vi/5AOn0BmSXyE/default.jpg"/></td> */}
                                         <td>${c.price}</td>
+                                        <td>{c.duration} min.</td>
                                         <td>{c.created}</td>
                                         <td>
                                             <div className="btn-group mr-2">

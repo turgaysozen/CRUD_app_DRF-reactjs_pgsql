@@ -7,6 +7,10 @@ export const FetchCourses = async () => {
     return await axiosInstance.get('/course')
 }
 
+export const FetchHomeCourses = async () => {
+    return await axiosInstance.get('/course/home')
+}
+
 // delete specific course
 export const DeleteCourse = async (id) => {
     return await axiosInstance.delete(`/course/delete/${id}`)
@@ -54,6 +58,19 @@ export const UpdateUser = async (props, data) => {
 export const FindUser = async (props) => {
     return await axiosInstance.get(`/user/${props.match.params.id}`)
 }
+
+
+// category
+
+export const FetchCategories = async () => {
+    return await axiosInstance.get('/course/categories')
+}
+
+
+
+
+
+
 
 // login
 
