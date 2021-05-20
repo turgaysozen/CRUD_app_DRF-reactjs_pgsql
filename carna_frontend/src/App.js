@@ -24,7 +24,7 @@ function App() {
         <ProtectedRoute path="/admin/courses" exact component={Courses} />
         <ProtectedRoute path="/admin/course/edit/:id" component={CourseEdit} />
         <ProtectedRoute path="/admin/course/create" component={CourseCreate} />
-        <ProtectedRoute path="/course/view/:id" component={CourseView} />
+        <ProtectedRoute path="/course/:id" component={CourseView} />
         <ProtectedRoute path="/admin/users" exact component={Users} />
         <ProtectedRoute path="/admin/user/create" component={UserCreate} />
         <ProtectedRoute path="/admin/user/edit/:id" component={UserEdit} />

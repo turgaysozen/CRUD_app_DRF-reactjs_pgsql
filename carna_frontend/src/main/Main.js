@@ -40,7 +40,6 @@ export default function Main() {
                                             <span>Total Student: {c.student_count}</span><br></br>
                                             <span>Created Time: {String(c.created).split('T')[0]}</span>
                                         </div>
-                                        {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/5AOn0BmSXyE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> */}
                                     </div>
                                 </div>
                             )

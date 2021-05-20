@@ -5,6 +5,7 @@ import { FindCourse, FetchCourses } from '../services';
 export default function CourseView(props) {
     const [course, setCourse] = useState([])
     const [courses, setCourses] = useState([])
+    const [video_src, setVideoSrc] = useState("")
 
     // find selected course to view
     useEffect(() => {
@@ -12,6 +13,9 @@ export default function CourseView(props) {
             const res = await FindCourse(props.props)
             if (res.status === 200) {
                 setCourse(res.data)
+                const src = `https://www.youtube.com/embed/${res.data.video_id}`
+                setVideoSrc(src)
+                
             }
         }
         loadCourse()
@@ -31,8 +35,9 @@ export default function CourseView(props) {
     return (
         <Wrapper>
             <div style={{ marginTop: '10px' }}>
-                <main>
-                    <h2>{course.name} Details</h2>
+                <main className="col-md-12">
+                    <h2>{course.name}</h2>
+                    <iframe width="760" height="505" src={video_src} title="YouTube video player" frameborder="0" allow="fullscreen accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <p className="fs-5 col-md-8">{course.description}</p>
                     <div className="mb-5">
                         <a onClick={() => alert('Enrolled!')} className="btn btn-primary btn-lg px-4">${course.price} BUY NOW!</a>

@@ -24,9 +24,9 @@ urlpatterns = [
     path('home', CourseHomeViewSet.as_view({
         'get': 'course_home_list',
     })),
-    path('course_by_cat', CourseHomeViewSet.as_view({
-        'get': 'course_query',
-    })),
+    # path('course_by_cat', CourseHomeViewSet.as_view({
+    #     'get': 'course_query',
+    # })),
     path('courses_by_category/<int:category_id>', CourseHomeViewSet.as_view({
         'get': 'courses_by_category',
     })),
