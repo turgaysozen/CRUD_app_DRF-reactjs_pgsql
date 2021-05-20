@@ -30,4 +30,7 @@ urlpatterns = [
     path('courses_by_category/<int:category_id>', CourseHomeViewSet.as_view({
         'get': 'courses_by_category',
     })),
+    path('<int:course_id>/home', CourseHomeViewSet.as_view({
+        'get': 'get_course'
+    })),
 ]

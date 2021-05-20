@@ -83,6 +83,14 @@ class CourseHomeViewSet(viewsets.ViewSet):
         serializer = CourseSerializer(courses, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    def get_course(self, request, course_id):
+        qs = Course.objects.filter(id=course_id)
+        if not qs:
+            return Response({"message": "course could not find!"}, status=status.HTTP_404_NOT_FOUND)
+        obj = qs.first()
+        serializer = CourseByCategory(obj)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
     # def course_query(self, request):
     #     course_by_category = Course.objects.filter()

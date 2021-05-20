@@ -37,6 +37,11 @@ export const FindCourse = async (props) => {
 
 }
 
+export const FindCourseHome = async (props) => {
+    return await axiosInstance.get(`/course/${props.match.params.id}/home`)
+
+}
+
 // user fetch funcs.
 
 // get all users

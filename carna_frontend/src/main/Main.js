@@ -30,7 +30,7 @@ export default function Main() {
                             const alt = c.name
                             c.student_count = Math.floor(Math.random() * 50); // total enrolled student, the number created randomly
                             return (
-                                <div style={{ cursor: "pointer" }} key={c.id} onClick={() => window.location.href = `/course/${c.id}`} className="row col-md-12">
+                                <div style={{ cursor: "pointer" }} key={c.id} onClick={() => window.location.href = `/course/${c.id}/home`} className="row col-md-12">
                                     <hr />
                                     <div className="row align-items-center col-md-12 mt-2">
                                         <div className="col-md-3 pt-2"><img alt={alt} className="img-fluid rounded" src={thumb} /></div>

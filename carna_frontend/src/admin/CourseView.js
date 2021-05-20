@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Wrapper from './Wrapper'
-import { FindCourse, FetchCourses } from '../services';
+import { FindCourse, FetchCourses, FindCourseHome } from '../services';
 
 export default function CourseView(props) {
     const [course, setCourse] = useState([])
@@ -10,7 +10,7 @@ export default function CourseView(props) {
     // find selected course to view
     useEffect(() => {
         const loadCourse = async () => {
-            const res = await FindCourse(props.props)
+            const res = await FindCourseHome(props)
             if (res.status === 200) {
                 setCourse(res.data)
                 const src = `https://www.youtube.com/embed/${res.data.video_id}`
@@ -37,7 +37,7 @@ export default function CourseView(props) {
             <div style={{ marginTop: '10px' }}>
                 <main className="col-md-12">
                     <h2>{course.name}</h2>
-                    <iframe width="760" height="505" src={video_src} title="YouTube video player" frameborder="0" allow="fullscreen accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="760" height="505" src={video_src} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                     <p className="fs-5 col-md-8">{course.description}</p>
                     <div className="mb-5">
                         <a onClick={() => alert('Enrolled!')} className="btn btn-primary btn-lg px-4">${course.price} BUY NOW!</a>

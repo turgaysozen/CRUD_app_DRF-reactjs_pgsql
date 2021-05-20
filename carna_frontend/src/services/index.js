@@ -13,7 +13,8 @@ import {
     Logout,
     FetchHomeCourses,
     FetchCategories,
-    FetchHomeCoursesByCategory
+    FetchHomeCoursesByCategory,
+    FindCourseHome
 
 } from './axios-fetch-service'
 
@@ -38,5 +39,6 @@ export {
     Logout,
     FetchHomeCourses,
     FetchCategories,
-    FetchHomeCoursesByCategory
+    FetchHomeCoursesByCategory,
+    FindCourseHome
 }
