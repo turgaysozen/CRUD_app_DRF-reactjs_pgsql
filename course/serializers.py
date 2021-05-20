@@ -8,13 +8,15 @@ from django.forms import ValidationError
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ['id', 'name', 'description', 'price', 'duration', 'video_id', 'created'] 
+        fields = ['id', 'name', 'description', 'price', 'duration', 'video_id', 'created', 'categories'] 
 
 
 class CategorySerializer(serializers.ModelSerializer):
+    course_count = serializers.IntegerField(read_only=True)
     class Meta:
         model = Category
-        fields = ['id', 'name'] 
+        fields = ['id', 'name','course_count'] 
+        ordering = ['-name']
 
 
 class CourseByCategory(serializers.ModelSerializer):

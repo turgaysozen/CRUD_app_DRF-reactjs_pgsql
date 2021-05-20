@@ -25,7 +25,10 @@ export default function Nav() {
             <a className="btn btn-sm ml-2 btn-danger" onClick={() => Logout()}>Logout</a>
           </div>
           :
-          <a className="btn btn-sm mr-3 btn-danger" href="/admin/login">Login</a>
+          <div>
+            <a className="btn btn-sm mr-3 btn-primary" href="/admin/login">Login</a>
+            <a className="btn btn-sm mr-3 btn-success" href="/admin/signup">Signup</a>
+          </div>
       }
 
     </header>

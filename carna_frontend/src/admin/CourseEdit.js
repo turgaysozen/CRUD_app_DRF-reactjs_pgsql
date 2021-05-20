@@ -108,7 +108,7 @@ export default function CourseEdit(props) {
                 </div>
                 <div className="form-group">
                     <label>Price</label>
-                    <input type="number" className="form-control" name="price"
+                    <input type="number" step="any" className="form-control" name="price"
                         defaultValue={price}
                         onChange={e => setPrice(e.target.value)}
                     />

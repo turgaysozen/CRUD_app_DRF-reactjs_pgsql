@@ -1,31 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { FetchHomeCoursesByCategory } from '../services/'
 import Wrapper from '../admin/Wrapper'
-import { Link, Redirect } from "react-router-dom";
-import { FetchHomeCourses } from '../services'
 
-// main component, it shows courses on http://localhost:3000/
+export default function CoursesByCategory(props) {
+    const [coursesByCategory, setCoursesByCategory] = useState([])
+    const [id, setId] = useState([])
+    const [cat_name, setCatName] = useState([])
 
-export default function Main() {
-    const [courses, setCourses] = useState([])
-
-    // get all courses
+    console.log(props)
     useEffect(() => {
-        const loadCourses = async () => {
-            const res = await FetchHomeCourses()
-            if (res.status === 200) {
-                setCourses(res.data)
-            } else alert('Something went wrong!')
+        const loadCoursesbyCat = async () => {
+            let res = await FetchHomeCoursesByCategory(props)
+            setCoursesByCategory(res.data)
+            setId(props.match.params.id)
+            setCatName(props.match.params.cat_name)
         }
-        loadCourses()
-    }, [])
+        loadCoursesbyCat()
+    }, [props.match.params.id])
 
     return (
         <Wrapper>
             <main role="main">
                 <div className="album py-5 bg-light">
                     <div className="container">
-                        <h4>All Courses</h4>
-                        {courses.map(c => {
+                        <h4><span style={{color:"red"}}>{cat_name}</span> Courses</h4>
+                        {coursesByCategory.map(c => {
                             const thumb = `https://img.youtube.com/vi/${c.video_id}/mqdefault.jpg`
                             const alt = c.name
                             c.student_count = Math.floor(Math.random() * 50); // total enrolled student, the number created randomly
@@ -49,6 +48,5 @@ export default function Main() {
                 </div>
             </main>
         </Wrapper>
-
     )
 }

@@ -11,6 +11,11 @@ export const FetchHomeCourses = async () => {
     return await axiosInstance.get('/course/home')
 }
 
+// courses by category_name
+export const FetchHomeCoursesByCategory = async (props) => {
+    return await axiosInstance.get(`/course/courses_by_category/${props.match.params.id}`)
+}
+
 // delete specific course
 export const DeleteCourse = async (id) => {
     return await axiosInstance.delete(`/course/delete/${id}`)
@@ -59,9 +64,7 @@ export const FindUser = async (props) => {
     return await axiosInstance.get(`/user/${props.match.params.id}`)
 }
 
-
 // category
-
 export const FetchCategories = async () => {
     return await axiosInstance.get('/course/categories')
 }

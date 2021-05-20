@@ -39,7 +39,6 @@ export default function CourseCreate() {
     // create course
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(video_id.split('/'))
         const res = await CreateCourse({ name: course_name, description: description, price: price, duration: duration, video_id: video_id.split('/')[3], categories: selectedCategories.map(c => c.id) })
         if (res.status === 201) {
             setRedirect(true)
@@ -75,7 +74,7 @@ export default function CourseCreate() {
                 </div>
                 <div className="form-group">
                     <label>Price</label>
-                    <input type="number" className="form-control" name="price"
+                    <input type="number" step="any" className="form-control" name="price"
                         onChange={e => setPrice(e.target.value)}
                     />
                 </div>

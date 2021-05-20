@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CourseViewSet, CourseHomeViewSet, CategoryViewSet
+from .views import CourseViewSet, CourseHomeViewSet, CategoryHomeViewSet
 
 urlpatterns = [
     path('', CourseViewSet.as_view({
@@ -17,7 +17,7 @@ urlpatterns = [
     path('delete/<int:course_id>', CourseViewSet.as_view({
         'delete': 'delete_course'
     })),
-    path('categories', CategoryViewSet.as_view({
+    path('categories', CategoryHomeViewSet.as_view({
         'get': 'get_categories',
     })),
 
@@ -26,5 +26,8 @@ urlpatterns = [
     })),
     path('course_by_cat', CourseHomeViewSet.as_view({
         'get': 'course_query',
+    })),
+    path('courses_by_category/<int:category_id>', CourseHomeViewSet.as_view({
+        'get': 'courses_by_category',
     })),
 ]

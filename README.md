@@ -1,3 +1,6 @@
+![Alt text](carna.png?raw=true "CARNA")
+
+
 The take home project is built by Django Rest Framework and ReactJS as a web project.
 Backend is built by DRF + Postgresql and frontend is built by ReactJS.
 
@@ -15,3 +18,4 @@ Here are other things what I want to add extra if I had more time:
 - Reactjs test (backend test is done)
 - Non-blocking concurrent request
 - Containerizing the project
+

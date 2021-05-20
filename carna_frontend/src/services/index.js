@@ -12,7 +12,8 @@ import {
     AuthUser,
     Logout,
     FetchHomeCourses,
-    FetchCategories
+    FetchCategories,
+    FetchHomeCoursesByCategory
 
 } from './axios-fetch-service'
 
@@ -36,5 +37,6 @@ export {
     AuthUser,
     Logout,
     FetchHomeCourses,
-    FetchCategories
+    FetchCategories,
+    FetchHomeCoursesByCategory
 }

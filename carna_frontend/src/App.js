@@ -1,6 +1,7 @@
 import './App.css';
 import Courses from './admin/Courses'
 import Main from './main/Main'
+import CoursesByCategory from './main/CoursesByCategory'
 import CourseCreate from './admin/CourseCreate'
 import CourseEdit from './admin/CourseEdit'
 import Users from './admin/Users'
@@ -18,6 +19,7 @@ function App() {
     <div className="App">
       <Switch>
         <Route path="/" exact component={Main} />
+        <Route path="/courses/category/:id/:cat_name" component={CoursesByCategory} />
         <Route path="/admin/login" component={Login} />
         <ProtectedRoute path="/admin/courses" exact component={Courses} />
         <ProtectedRoute path="/admin/course/edit/:id" component={CourseEdit} />

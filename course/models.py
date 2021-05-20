@@ -12,7 +12,7 @@ class Category(models.Model):
 class Course(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(max_length=255)
-    price = models.IntegerField()
+    price = models.FloatField()
     duration = models.IntegerField()
     video_id = models.CharField(max_length=30)
     categories = models.ManyToManyField(Category)
